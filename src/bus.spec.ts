@@ -1,6 +1,6 @@
 import { Injectable, Scope } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
-import { DefaultEventEmitter, Emitter, EventBus, EventBusModule, From, On } from './index';
+import { DefaultEventEmitter, Emitter, EventBus, EventBusModule, EventBusModuleOptions, From, On } from './index';
 
 @Emitter('mocked')
 class MockEmitter extends DefaultEventEmitter {}
@@ -59,12 +59,17 @@ class MockOn {
   onTestFromMocked(payload: any) {
     this.calls('mocked', payload);
   }
+
+  @On('test.*')
+  onTestWildcard(payload: any) {
+    this.calls('test.*', payload);
+  }
 }
 
 describe('Module Tests', () => {
-  async function setup() {
+  async function setup(config?: EventBusModuleOptions) {
     const module = Test.createTestingModule({
-      imports: [EventBusModule.forRoot()],
+      imports: [EventBusModule.forRoot(config)],
       providers: [MockEmitter, MockOn, MockOnRequest]
     });
     return module.compile().then(module => module.init());
@@ -125,5 +130,20 @@ describe('Module Tests', () => {
 
     const actual = module.get(EventBus).emitAsync('rethrow', { _: 'error' });
     await expect(actual).rejects.toThrow('rethrow');
+  });
+
+  it('should work with evementemitter2 options (wildcard)', async () => {
+    const module = await setup({
+      wildcard: true,
+      delimiter: '.'
+    });
+
+    await module.get(EventBus).emitAsync('test.one', { _: '1' });
+    await module.get(EventBus).emitAsync('test.two', { _: '2' });
+
+    const actual = module.get(MockOn).calls;
+    expect(actual).toBeCalledTimes(2);
+    expect(actual).toBeCalledWith('test.*', { _: '1' });
+    expect(actual).toBeCalledWith('test.*', { _: '2' });
   });
 });
