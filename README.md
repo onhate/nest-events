@@ -5,7 +5,7 @@ your [NestJS](https://nestjs.com/) applications. With Nest Events, you can easil
 application, making it simpler to implement various communication patterns and workflows.
 
 It's the same as `@nestjs/event-emitter` but allowing you to implement your own emitter, like AWS SNS, RabbitMQ, etc.
-A default emitter is already provided by default using EventEmitter2.
+A default emitter is already provided by default using [EventEmitter2](https://github.com/EventEmitter2/EventEmitter2).
 
 ## Installation
 
@@ -137,14 +137,21 @@ export class MyListener {
 
 ## Configuration
 
-The `EventBusModule.forRoot()` method accepts an optional configuration object. Here's an example of how to use it:
+The `EventBusModule.forRoot()` method accepts an optional configuration object.
+See [EventEmitter2](https://github.com/EventEmitter2/EventEmitter2) for more configuration options details.
+Here's an example of how to use it:
 
 ```typescript
 import { Module } from '@nestjs/common';
 import { EventBusModule } from 'nest-events';
 
 @Module({
-  imports: [EventBusModule.forRoot({ global: false })],
+  imports: [
+    EventBusModule.forRoot({
+      global: true // Set to "true" (default) to register as a global module
+      /* Additional configuration options from eventemitter2 can be added here */
+    })
+  ]
 })
 export class AppModule {}
 ```
