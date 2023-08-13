@@ -1,11 +1,13 @@
 {
   "name": "nest-events",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": false,
   "license": "MIT",
   "repository": {
     "url": "https://github.com/onhate/nest-events.git"
   },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "keywords": [
     "nestjs",
     "nest.js",
@@ -19,6 +21,7 @@
   ],
   "scripts": {
     "build": "tsc --project tsconfig-build.json",
+    "prebuild": "npx rimraf dist",
     "prepublish": "npm run build",
     "lint": "eslint \"{src}/**/*.ts\" --fix",
     "test": "jest",
