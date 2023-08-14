@@ -17,7 +17,7 @@ export interface EventBusModuleOptions extends ConstructorOptions {
 
 @Module({})
 export class EventBusModule {
-  static forRoot(options?: EventBusModuleOptions): DynamicModule {
+  static register(options?: EventBusModuleOptions): DynamicModule {
     return {
       global: options?.global ?? true,
       module: EventBusModule,

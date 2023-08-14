@@ -69,7 +69,7 @@ class MockOn {
 describe('Module Tests', () => {
   async function setup(config?: EventBusModuleOptions) {
     const module = Test.createTestingModule({
-      imports: [EventBusModule.forRoot(config)],
+      imports: [EventBusModule.register(config)],
       providers: [MockEmitter, MockOn, MockOnRequest]
     });
     return module.compile().then(module => module.init());
