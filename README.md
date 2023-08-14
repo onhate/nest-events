@@ -159,8 +159,8 @@ export class AppModule {}
 ## Contributing
 
 We welcome contributions to the Nest Events library! If you find a bug, have a feature request, or want to improve the
-documentation, please [open an issue](https://github.com/your-repo-link/issues)
-or [submit a pull request](https://github.com/your-repo-link/pulls).
+documentation, please [open an issue](https://github.com/onhate/nest-events)
+or [submit a pull request](https://github.com/onhate/nest-events).
 
 ## License
 
@@ -168,5 +168,4 @@ This library is released under the [MIT License](https://opensource.org/licenses
 
 ---
 
-Happy event handling with Nest Events! If you have any questions, feel free to reach out or refer to
-the [NestJS documentation](https://docs.nestjs.com/).
+Happy event handling with Nest Events! 🎉
