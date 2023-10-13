@@ -1,4 +1,4 @@
-# Nest Events Library
+# Nest Events @Emitter
 
 Welcome to the Nest Events library! This library provides event handling and emitting capabilities for
 your [NestJS](https://nestjs.com/) applications. With Nest Events, you can easily manage and trigger events within your
