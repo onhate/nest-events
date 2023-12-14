@@ -10,7 +10,7 @@ export class EventBus {
     return await this.emitter().emitAsync(event, ...args);
   }
 
-  public emitter(emitter: string = 'default'): IEventEmitter | undefined {
+  public emitter(emitter: string = 'default'): IEventEmitter {
     if (this.module.getEmitters().has(emitter)) {
       return this.module.getEmitters().get(emitter);
     }
