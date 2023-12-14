@@ -1,7 +1,7 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { DiscoveryModule } from '@nestjs/core';
 import { ConstructorOptions } from 'eventemitter2';
-import { DefaultEventEmitter } from './definitions';
+import { DefaultEventEmitter, Options } from './definitions';
 import { EventBus } from './eventbus';
 import { EventBusInitializer } from './initializer';
 
@@ -23,7 +23,7 @@ export class EventBusModule {
       module: EventBusModule,
       imports: [DiscoveryModule],
       providers: [
-        { provide: 'Options', useValue: options },
+        { provide: Options, useValue: options },
         EventBusInitializer,
         EventBus,
         DefaultEventEmitter
